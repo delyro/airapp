@@ -45,4 +45,4 @@ Finally, run the application:
 php artisan serve
 ```
 
-The will be available at [localhost:8000](http://localhost:8000 "localhost:8000")
+The app will be available at [localhost:8000](http://localhost:8000 "localhost:8000")
