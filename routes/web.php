@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'CityController@index')->name('city.index');
+Route::get('/city/{city}', 'CityController@show')->name('city.show');
+Route::get('/station/{station}', 'StationController@show')->name('station.show');
