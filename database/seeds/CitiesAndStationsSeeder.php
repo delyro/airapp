@@ -17,9 +17,9 @@ class CitiesAndStationsSeeder extends Seeder
         $request = $client->get('http://api.gios.gov.pl/pjp-api/rest/station/findAll');
         $response = $request->getBody()->getContents();
 
-        $data = collect(json_decode($response, true));
+        $data = json_decode($response, true);
         
-        $data->each(function ($item, $key) {
+        foreach($data as $key => $item) {
 
             if($item['city']) {
                 City::firstOrCreate([
@@ -34,6 +34,8 @@ class CitiesAndStationsSeeder extends Seeder
                 'name' => $item['stationName'],
                 'addressStreet' => $item['addressStreet']
             ]);
-        });
+
+        }
+        
     }
 }
