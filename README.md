@@ -4,7 +4,7 @@ This app allows you to check air quality level in your area.
 ### Prerequisites
 - PHP 7.3 or higher
 - Composer
-- Database (I used MySQL 8.0.17)
+- MySQL, PostgreSQL, SQLite or SQL Server database
 
 ### Installation
 
