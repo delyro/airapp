@@ -9,4 +9,8 @@ class Station extends Model
     public $timestamps = false;
 
     protected $fillable = ['id', 'city_id', 'name', 'addressStreet'];
+
+    public function city() {
+        return $this->belongsTo(City::class);
+    }
 }

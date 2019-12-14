@@ -13,9 +13,18 @@ class StationController extends Controller
         $request = $client->get('http://api.gios.gov.pl/pjp-api/rest/aqindex/getIndex/' . $station->id);
         $response = $request->getBody()->getContents();
 
-        $data = collect(json_decode($response, true));
-        
-        return view('station.show', compact('data'));
-            
+        $data = json_decode($response, true);
+
+        return view('station.show', [
+            'cityId' => $station->city->id,
+            'stCalcDate' => $data['stCalcDate'] ?? null,
+            'stIndexLevel' => $data['stIndexLevel']['indexLevelName'] ?? null,
+            'no2IndexLevel' => $data['no2IndexLevel']['indexLevelName'] ?? null,
+            'coIndexLevel' => $data['coIndexLevel']['indexLevelName'] ?? null,
+            'pm10IndexLevel' => $data['pm10IndexLevel']['indexLevelName'] ?? null,
+            'pm25IndexLevel' => $data['pm25IndexLevel']['indexLevelName'] ?? null,
+            'o3IndexLevel' => $data['o3IndexLevel']['indexLevelName'] ?? null,
+            'c6h6IndexLevel' => $data['c6h6IndexLevel']['indexLevelName'] ?? null,
+        ]);    
     }
 }
