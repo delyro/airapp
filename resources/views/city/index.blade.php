@@ -4,14 +4,23 @@
 
 <h2>Wybierz miasto</h2>
 
+<table class="table table-borderless">
+    <thead>
+        <tr>
+        <th scope="col">#</th>
+        <th scope="col">Miasto</th>
+        <th scope="col">Liczba stacji pomiarowych</th>
+        </tr>
+    </thead>
+    <tbody>
 @foreach ($cities as $city)
-<a href="{{ route('city.show', ['city' => $city]) }}">
-<div class="badge badge-primary text-wrap" style="width: 6rem;">
-    {{ $city->name }}
-</div>
-</a>
-
+    <tr>
+    <th scope="row">{{ $loop->iteration }}</th>
+    <td><a href="{{ route('city.show', ['city' => $city]) }}">{{ $city->name }}</a></td>
+    <td>{{ $city->stations->count() }}</td>
+    </tr>
 @endforeach
-
+</tbody>
+</table>
 
 @endsection
