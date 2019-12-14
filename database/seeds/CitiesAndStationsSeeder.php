@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use GuzzleHttp\Exception\BadResponseException;
+use GuzzleHttp\Client;
 use App\City;
 use App\Station;
 
@@ -13,8 +15,14 @@ class CitiesAndStationsSeeder extends Seeder
      */
     public function run()
     {
-        $client = new \GuzzleHttp\Client();
-        $request = $client->get('http://api.gios.gov.pl/pjp-api/rest/station/findAll');
+        $client = new Client();
+        try {
+            $request = $client->get('http://api.gios.gov.pl/pjp-api/rest/station/findAll');
+        } catch (BadResponseException $e) {
+            $this->command->error("SQL Error: " . $e->getMessage());
+            return false;
+        }
+        
         $response = $request->getBody()->getContents();
 
         $data = json_decode($response, true);
@@ -36,6 +44,6 @@ class CitiesAndStationsSeeder extends Seeder
             ]);
 
         }
-        
+
     }
 }
